@@ -43,6 +43,7 @@
     "node-trello": "^1.1.2",
     "node-trello-utils": "git://github.com/ivantage/node-trello-utils",
     "async": "^1.1.0",
-    "handlebars": "^3.0.3"
+    "handlebars": "^3.0.3",
+    "kramed": "^0.5.0"
   }
 }

@@ -11,15 +11,14 @@
 
 module.exports = function(grunt) {
 
-  // Please see the Grunt documentation for more information regarding task
-  // creation: http://gruntjs.com/creating-tasks
-
   var Trello = require('node-trello')
     , trelloUtils = require('node-trello-utils')
     , async = require('async')
     , hbs = require('handlebars');
 
-  grunt.registerMultiTask('ivantage_trello_release_notes', 'Build release notes from user stories in Trello cards.', function() {
+  var taskName = 'ivantage_trello_release_notes';
+
+  grunt.registerMultiTask(taskName, 'Build release notes from user stories in Trello cards.', function() {
     var done = this.async();
 
     // Try to gather some info on the host package for more useful defaults
@@ -30,21 +29,37 @@ module.exports = function(grunt) {
       pkg = {version: 'X.Y.Z'};
     }
 
-    console.log(pkg.version);
-
     // Merge task-specific and/or target-specific options with these defaults.
     var opts = this.options({
-      sprintBoards: 'baord1,board2',
-      productLabel: 'awesomeProduct',
-      featuresLabel: 'Feature',
-      bugLabel: 'Bug',
-      outfile: 'releasenotes/tag-v' + pkg.version + '.md',
-      trelloApiKey: '',
-      trelloToken: '',
+      sprintBoards: '********,********',
+      productLabel: '********',
+      outfile: 'releasenotes/release-v' + pkg.version + '.md',
+      trelloApiKey: '********************************',
+      trelloToken: '****************************************************************',
       doneListName: 'Live/Done',
       headerTpl: '### Version ' + pkg.version,
       storyTpl: '- {{name}} ([go to card]({{url}}))'
     });
+
+    if(opts.sprintBoards.charAt(0) === '*') {
+      grunt.log.error(taskName + ' requires a valid sprint board url or id.');
+      return done(false);
+    }
+
+    if(opts.trelloApiKey.charAt(0) === '*') {
+      grunt.log.error(taskName + ' requires a valid Trello api key.');
+      return done(false);
+    }
+
+    if(opts.trelloToken.charAt(0) === '*') {
+      grunt.log.error(taskName + ' requires a valid Trello token.');
+      return done(false);
+    }
+
+    if(opts.productLabel.charAt(0) === '*') {
+      grunt.log.error(taskName + ' requires a product label (i.e. Trello label).');
+      return done(false);
+    }
 
     var t = new Trello(opts.trelloApiKey, opts.trelloToken);
 
@@ -76,6 +91,29 @@ module.exports = function(grunt) {
           }).length > 0;
         });
 
+        // Sort cards by story size, then alphabetically
+        cards.sort(function(a, b) {
+          var aSize = -1
+            , bSize = -1;
+          if(/\((\d+)\)/.exec(a.name)) {
+            aSize = parseInt(RegExp.$1, 10);
+          }
+          if(/\((\d+)\)/.exec(b.name)) {
+            bSize = parseInt(RegExp.$1, 10);
+          }
+
+          // i.e. both -1
+          if(aSize === bSize) {
+            return a < b ? -1 : 1;
+          }
+          
+          if(aSize > -1 && bSize > -1) {
+            return aSize < bSize ? 1 : -1;
+          }
+
+          return aSize > -1 ? -1 : 1;
+        });
+
         buildReleaseNotesFromCards(cards);
       });
 
@@ -85,7 +123,7 @@ module.exports = function(grunt) {
       });
 
       grunt.file.write(opts.outfile, [opts.headerTpl, ''].concat(notes).join('\n'));
-      grunt.log.writeln('Release note written to ' + opts.outfile);
+      grunt.log.writeln('Notes written to "' + opts.outfile + '"');
     };
 
   });
