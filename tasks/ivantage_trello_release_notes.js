@@ -30,6 +30,7 @@ module.exports = function(grunt) {
       pkg = {version: 'X.Y.Z'};
     }
 
+    console.log(pkg.version);
 
     // Merge task-specific and/or target-specific options with these defaults.
     var opts = this.options({
@@ -37,15 +38,13 @@ module.exports = function(grunt) {
       productLabel: 'awesomeProduct',
       featuresLabel: 'Feature',
       bugLabel: 'Bug',
-      outfile: 'releasenotes/tag-v' +  + '.md',
+      outfile: 'releasenotes/tag-v' + pkg.version + '.md',
       trelloApiKey: '',
       trelloToken: '',
       doneListName: 'Live/Done',
       headerTpl: '### Version ' + pkg.version,
       storyTpl: '- {{name}} ([go to card]({{url}}))'
     });
-
-    console.log(grunt.file.readJSON('package.json'));
 
     var t = new Trello(opts.trelloApiKey, opts.trelloToken);
 
