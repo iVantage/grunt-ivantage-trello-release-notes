@@ -31,44 +31,31 @@ module.exports = function(grunt) {
 
     // Merge task-specific and/or target-specific options with these defaults.
     var opts = this.options({
-      sprintBoards: '********,********',
-      productLabel: '********',
       outfile: 'releasenotes/release-v' + pkg.version + '.md',
-      trelloApiKey: '********************************',
-      trelloToken: '****************************************************************',
       doneListName: 'Live/Done',
       headerTpl: '### Version ' + pkg.version,
       storyTpl: '- {{name}} ([go to card]({{url}}))'
     });
 
-    if(opts.sprintBoards.charAt(0) === '*') {
-      grunt.log.error(taskName + ' requires a valid sprint board url or id.');
-      return done(false);
-    }
+    // Make sure we have our required configs
+    this.requiresConfig(
+      [taskName, this.target, 'sprintBoards'].join('.'),
+      [taskName, this.target, 'productLabel'].join('.'),
+      [taskName, this.target, 'trelloApiKey'].join('.'),
+      [taskName, this.target, 'trelloToken'].join('.')
+    );
 
-    if(opts.trelloApiKey.charAt(0) === '*') {
-      grunt.log.error(taskName + ' requires a valid Trello api key.');
-      return done(false);
-    }
+    var t = new Trello(
+      this.data.trelloApiKey,
+      this.data.trelloToken
+    );
 
-    if(opts.trelloToken.charAt(0) === '*') {
-      grunt.log.error(taskName + ' requires a valid Trello token.');
-      return done(false);
-    }
-
-    if(opts.productLabel.charAt(0) === '*') {
-      grunt.log.error(taskName + ' requires a product label (i.e. Trello label).');
-      return done(false);
-    }
-
-    var t = new Trello(opts.trelloApiKey, opts.trelloToken);
-
-    var sprintBoardIds = opts
+    var sprintBoardIds = this.data
         .sprintBoards
         .split(',')
         .map(trelloUtils.getBoardIdFromUrl);
 
-    var productLabel = opts.productLabel.toLowerCase();
+    var productLabel = this.data.productLabel.toLowerCase();
 
     var tpl = hbs.compile(opts.storyTpl);
 
@@ -124,6 +111,7 @@ module.exports = function(grunt) {
 
       grunt.file.write(opts.outfile, [opts.headerTpl, ''].concat(notes).join('\n'));
       grunt.log.writeln('Notes written to "' + opts.outfile + '"');
+      done();
     };
 
   });

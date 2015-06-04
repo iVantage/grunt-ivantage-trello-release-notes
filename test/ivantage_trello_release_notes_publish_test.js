@@ -1,6 +1,7 @@
 'use strict';
 
-var grunt = require('grunt');
+var grunt = require('grunt')
+  , cheerio = require('cheerio');
 
 /*
   ======== A Handy Little Nodeunit Reference ========
@@ -22,19 +23,20 @@ var grunt = require('grunt');
     test.ifError(value)
 */
 
-exports.ivantage_trello_release_notes = {
+exports.ivantage_trello_release_notes_publish = {
   setUp: function(done) {
     // setup here if necessary
     done();
   },
   default_options: function(test) {
-    test.expect(0);
+    test.expect(1);
 
-    /**
-     * @todo ...
-     */
-    console.log('Create a public board to test this with!');
+    var actual = grunt.file.read('tmp/consolidated-notes.html')
+      , $actual = cheerio.load(actual);
+    
+    test.equal($actual('h3').length, 2);
 
     test.done();
   }
 };
+

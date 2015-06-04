@@ -15,7 +15,6 @@ module.exports = function(grunt) {
     , kramed = require('kramed');
 
   grunt.registerMultiTask('ivantage_trello_release_notes_publish', 'Publish consolidated release notes.', function() {
-    var done = this.async();
 
     // Merge task-specific and/or target-specific options with these defaults.
     var opts = this.options({
