@@ -69,8 +69,9 @@ module.exports = function(grunt) {
           grunt.log.error(err);
           return done(false);
         }
+
         var cards = Array.prototype.concat.apply([], cardsAndCards);
-        
+
         // We only want the cards tagged with the given product label
         cards = cards.filter(function(c) {
           return c.labels.filter(function(f) {
@@ -93,7 +94,7 @@ module.exports = function(grunt) {
           if(aSize === bSize) {
             return a < b ? -1 : 1;
           }
-          
+
           if(aSize > -1 && bSize > -1) {
             return aSize < bSize ? 1 : -1;
           }

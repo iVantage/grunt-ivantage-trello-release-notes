@@ -33,7 +33,7 @@ exports.ivantage_trello_release_notes_publish = {
 
     var actual = grunt.file.read('tmp/consolidated-notes.html')
       , $actual = cheerio.load(actual);
-    
+
     test.equal($actual('h3').length, 2);
 
     test.done();

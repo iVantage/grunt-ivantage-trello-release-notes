@@ -26,6 +26,19 @@ module.exports = function(grunt) {
       }
     },
 
+    jscs: {
+      options: {
+        config: '.jscsrc'
+      },
+      files: {
+        src: [
+        'gruntfile.js',
+        'tasks/*.js',
+        '<%= nodeunit.tests %>'
+        ]
+      }
+    },
+
     // Before generating any new files, remove any previously-created files.
     clean: {
       tests: ['tmp']
@@ -75,6 +88,7 @@ module.exports = function(grunt) {
 
   // These plugins provide necessary tasks.
   grunt.loadNpmTasks('grunt-contrib-jshint');
+  grunt.loadNpmTasks('grunt-jscs');
   grunt.loadNpmTasks('grunt-contrib-clean');
   grunt.loadNpmTasks('grunt-contrib-nodeunit');
 
@@ -88,6 +102,6 @@ module.exports = function(grunt) {
   ]);
 
   // By default, lint and run all tests.
-  grunt.registerTask('default', ['jshint', 'test']);
+  grunt.registerTask('default', ['jshint', 'jscs', 'test']);
 
 };

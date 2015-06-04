@@ -30,7 +30,7 @@ module.exports = function(grunt) {
       // How many boards to show
       showMostRecent: 5,
 
-      // Where should we place the selected board ids? Assume there's a 
+      // Where should we place the selected board ids? Assume there's a
       updateConfigPath: [
         'ivantage_trello_release_notes',
         this.target,
@@ -97,8 +97,8 @@ module.exports = function(grunt) {
          * @see http://help.trello.com/article/759-getting-the-time-a-card-or-board-was-created
          */
         boards.sort(function(a, b) {
-          var aTime = parseInt(a.id.substring(0,8), 16)
-            , bTime = parseInt(b.id.substring(0,8), 16);
+          var aTime = parseInt(a.id.substring(0, 8), 16)
+            , bTime = parseInt(b.id.substring(0, 8), 16);
           // We want these in descending order
           return aTime < bTime ? 1 : -1;
         });

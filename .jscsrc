@@ -24,7 +24,6 @@
     "<",
     "<="
   ],
-  "requireCamelCaseOrUpperCaseIdentifiers": true,
   "validateQuoteMarks": "'",
   "disallowMultipleLineStrings": true,
   "disallowMixedSpacesAndTabs": true,
