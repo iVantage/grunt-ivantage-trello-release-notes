@@ -178,7 +178,15 @@ The Trello API requires that we fetch lists of boards in the context of a user
 or organization.
 
 
-## Usage Example
+## The "ivantage_trello_release" task
+
+### Overview
+This is a convenience task for running the three tasks above. It would build
+configs for each and run them for you. All valid settings and options for the
+above tasks can be added here.
+
+
+## Usage Examples
 
 A full blown example:
 
@@ -211,8 +219,30 @@ grunt.initConfig({
         'path/to/public/folder/release-notes.html': 'releasenotes/*.md'
       }
     }
-  },
+  }
 });
+```
+
+Using the consolidated task:
+
+```js
+grunt.initConfig({
+  ivantage_trello_release: {
+    options: {
+      header: '<html>...',
+      footer: '...</html>'
+    },
+    awesome_product: {
+      productLabel: 'AWESOME_PRODUCT',
+      trelloApiKey: process.env.TRELLO_API_KEY,
+      trelloToken: process.env.TRELLO_TOKEN
+      files: {
+        'path/to/public/folder/release-notes.html': 'releasenotes/*.md'
+      }
+    }
+  }
+});
+```
 ```
 
 
@@ -222,6 +252,7 @@ guidelines](https://github.com/iVantage/Contribution-Guidelines).
 
 
 ## Release History
+- 2015-06-05 v0.3.0 Add convenience task for running everything
 - 2015-06-04 v0.2.0 Add publish and board selection tasks
 - 2015-06-03 v0.1.0 Initial Release
 
