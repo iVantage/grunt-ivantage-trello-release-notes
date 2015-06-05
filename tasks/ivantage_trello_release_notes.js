@@ -53,7 +53,15 @@ module.exports = function(grunt) {
     var sprintBoardIds = this.data
         .sprintBoards
         .split(',')
+        .filter(function(b) {
+          return b.trim().length > 0;
+        })
         .map(trelloUtils.getBoardIdFromUrl);
+
+    if(!sprintBoardIds.length) {
+      grunt.log.writeln('No sprint boards provided... skipping release note generation');
+      return done(true);
+    }
 
     var productLabel = this.data.productLabel.toLowerCase();
 

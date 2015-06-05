@@ -21,6 +21,7 @@ module.exports = function(grunt) {
       dryRun: false,
       svnDoCommit: false,
       svnForceAdd: true,
+      svnCommitMsg: 'chore: Add release notes',
       svnCommitPaths: ['.']
     });
 
@@ -55,7 +56,9 @@ module.exports = function(grunt) {
     }
 
     // Commit release notes
-    var ciCmd = 'svn ci ' + opts.svnCommitPaths.join(' ');
+    var ciCmd = 'svn ci ';
+    ciCmd += '-m "' + opts.svnCommitMsg + '" ';
+    ciCmd += opts.svnCommitPaths.join(' ');
 
     if(opts.dryRun) {
       grunt.log.writeln('Note running: "' + ciCmd + '"');
