@@ -28,7 +28,8 @@ module.exports = function(grunt) {
 
     var boardsTask = 'ivantage_trello_release_boards'
       , notesTask = 'ivantage_trello_release_notes'
-      , publishTask = 'ivantage_trello_release_notes_publish';
+      , publishTask = 'ivantage_trello_release_notes_publish'
+      , svnCiTask = 'ivantage_trello_svn_ci';
 
     var mixins = {};
 
@@ -54,9 +55,20 @@ module.exports = function(grunt) {
       files: this.data.files
     };
 
+    // Create the "svn ci" task config
+    mixins[svnCiTask] = {};
+    mixins[svnCiTask][target] = {
+      options: opts
+    };
+
     grunt.config.merge(mixins);
 
     // Do all the things!
-    grunt.task.run([boardsTask, notesTask, publishTask]);
+    grunt.task.run([
+      boardsTask,
+      notesTask,
+      publishTask,
+      svnCiTask
+    ]);
   });
 };

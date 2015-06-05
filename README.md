@@ -178,12 +178,48 @@ The Trello API requires that we fetch lists of boards in the context of a user
 or organization.
 
 
+## The "ivantage_trello_svn_ci" task
+
+### Overview
+Add and commit your files to `svn`.
+
+
+
+
 ## The "ivantage_trello_release" task
 
 ### Overview
 This is a convenience task for running the three tasks above. It would build
 configs for each and run them for you. All valid settings and options for the
 above tasks can be added here.
+
+### Settings
+
+#### options.svnDoCommit
+Type: `Boolean`
+Default Value: `false`
+
+Whether or not to actually peroform this step. Essentially an opt-in for folks
+who want to use the consolidated task.
+
+#### options.dryRun
+Type: `String`
+Default Value: `false`
+
+Useful for debugging. Will cause the `svn` command to be written to the console
+rather than actually run.
+
+#### options.svnForceAdd
+Type: `String`
+Default Value: `true`
+
+Whether or not to force add the files to version control.
+
+#### options.svnCommitPaths
+Type: `Array<String>`
+Default Value: `['.']`
+
+The files to add and commit. Defaults to everything. Must be an array.
 
 
 ## Usage Examples
@@ -219,6 +255,17 @@ grunt.initConfig({
         'path/to/public/folder/release-notes.html': 'releasenotes/*.md'
       }
     }
+  },
+
+  ivantage_trello_svn_ci: {
+    awesome_product: {
+      options: {
+        svnCommitPaths: [
+          'releasenotes',
+          'path/to/public/folder/release-notes.html',
+        ]
+      }
+    }
   }
 });
 ```
@@ -230,7 +277,8 @@ grunt.initConfig({
   ivantage_trello_release: {
     options: {
       header: '<html>...',
-      footer: '...</html>'
+      footer: '...</html>',
+      svnDoCommit: true
     },
     awesome_product: {
       productLabel: 'AWESOME_PRODUCT',
