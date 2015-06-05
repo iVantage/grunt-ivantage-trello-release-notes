@@ -56,8 +56,6 @@ module.exports = function(grunt) {
 
     grunt.config.merge(mixins);
 
-    console.log(JSON.stringify(grunt.config.get(), null, '  '));
-
     // Do all the things!
     grunt.task.run([boardsTask, notesTask, publishTask]);
   });
