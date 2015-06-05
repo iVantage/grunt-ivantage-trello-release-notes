@@ -18,6 +18,11 @@ module.exports = function(grunt) {
 
   var taskName = 'ivantage_trello_release_notes';
 
+  hbs.registerHelper('ivhStoryName', function(name) {
+    // Stip out things in square brackets and trim
+    return name.replace(/\[[^\]]+\]/g, '').trim();
+  });
+
   grunt.registerMultiTask(taskName, 'Build release notes from user stories in Trello cards.', function() {
     var done = this.async();
 
@@ -35,7 +40,7 @@ module.exports = function(grunt) {
       doneListName: 'Live/Done',
       doneDoneDomain: '',
       headerTpl: '### Version ' + pkg.version,
-      storyTpl: '- {{name}} ([go to card]({{url}})) {{#if donedone}}{{#each donedone}}([#{{issue}}]({{url}})) {{/each}}{{/if}}'
+      storyTpl: '- {{ivhStoryName name}} ([go to card]({{url}})) {{#if donedone}}{{#each donedone}}([#{{issue}}]({{url}})) {{/each}}{{/if}}'
     });
 
     // Make sure we have our required configs
