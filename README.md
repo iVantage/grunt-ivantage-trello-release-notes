@@ -300,6 +300,7 @@ guidelines](https://github.com/iVantage/Contribution-Guidelines).
 
 
 ## Release History
+- 2015-06-05 v0.5.0 Skip note creation if no boards provided (failed before)
 - 2015-06-05 v0.4.0 Add task (opt-in) to commit files to svn
 - 2015-06-05 v0.3.0 Add convenience task for running everything
 - 2015-06-04 v0.2.0 Add publish and board selection tasks
