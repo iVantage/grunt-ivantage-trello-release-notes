@@ -291,7 +291,6 @@ grunt.initConfig({
   }
 });
 ```
-```
 
 
 ## Contributing
