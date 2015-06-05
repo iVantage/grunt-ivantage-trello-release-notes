@@ -33,8 +33,9 @@ module.exports = function(grunt) {
     var opts = this.options({
       outfile: 'releasenotes/release-v' + pkg.version + '.md',
       doneListName: 'Live/Done',
+      doneDoneDomain: '',
       headerTpl: '### Version ' + pkg.version,
-      storyTpl: '- {{name}} ([go to card]({{url}}))'
+      storyTpl: '- {{name}} ([go to card]({{url}})) {{#if donedone}}{{#each donedone}}([#{{issue}}]({{url}})) {{/each}}{{/if}}'
     });
 
     // Make sure we have our required configs
@@ -114,6 +115,31 @@ module.exports = function(grunt) {
       });
 
     var buildReleaseNotesFromCards = function(cards) {
+
+      // Get any embedded DoneDone links
+      if(opts.doneDoneDomain) {
+        var pattern = new RegExp('https://' + opts.doneDoneDomain + '\.mydonedone\.com/issuetracker/projects/([0-9])*/issues/([0-9])*','ig');
+
+        cards.forEach(function(c) {
+          var donedone = []
+            , matches
+            , match
+            , url;
+          matches = c.desc.match(pattern);
+          if(matches) {
+            url = RegExp.lastMatch;
+            match = url.match('issues\/([0-9]*)');
+            if(match) {
+              donedone.push({
+                url: url,
+                issue: match[1]
+              });
+            }
+          }
+          c.donedone = donedone;
+        });
+      }
+
       var notes = cards.map(function(c) {
         return tpl(c);
       });
