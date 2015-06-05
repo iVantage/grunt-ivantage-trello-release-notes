@@ -190,16 +190,6 @@ or organization.
 ### Overview
 Add and commit your files to `svn`.
 
-
-
-
-## The "ivantage_trello_release" task
-
-### Overview
-This is a convenience task for running the three tasks above. It would build
-configs for each and run them for you. All valid settings and options for the
-above tasks can be added here.
-
 ### Settings
 
 #### options.svnDoCommit
@@ -227,6 +217,14 @@ Type: `Array<String>`
 Default Value: `['.']`
 
 The files to add and commit. Defaults to everything. Must be an array.
+
+
+## The "ivantage_trello_release" task
+
+### Overview
+This is a convenience task for running the three tasks above. It would build
+configs for each and run them for you. All valid settings and options for the
+above tasks can be added here.
 
 
 ## Usage Examples
