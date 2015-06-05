@@ -66,6 +66,13 @@ Default Value: `Live/Done`
 The list name for "done" cards. Only cards in this list will be included in the
 final release notes.
 
+#### options.doneDoneDomain
+Type: `String`
+Default Value: `*None*`
+
+The domain of your DoneDone account - e.g. if your account is "awesomeco.mydonedone.com"
+you would provide "awesomeco".
+
 #### options.headerTpl
 Type: `String`
 Default Value: `### Version <%= *version from your package.json* %>`
