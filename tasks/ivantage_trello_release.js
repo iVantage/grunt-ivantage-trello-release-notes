@@ -65,10 +65,10 @@ module.exports = function(grunt) {
 
     // Do all the things!
     grunt.task.run([
-      boardsTask,
-      notesTask,
-      publishTask,
-      svnCiTask
+      boardsTask + ':' + target,
+      notesTask + ':' + target,
+      publishTask + ':' + target,
+      svnCiTask + ':' + target
     ]);
   });
 };
