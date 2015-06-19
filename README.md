@@ -108,7 +108,7 @@ Some HTML to include before the concatenated snippets.
 
 #### options.separator
 Type: `String`
-Default Value: `\n`
+Default Value: `\n\n\n`
 
 Text to insert between each of the given files when concatenating. Note that
 files are concatenated before being converted to HTML.

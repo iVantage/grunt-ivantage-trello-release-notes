@@ -19,7 +19,7 @@ module.exports = function(grunt) {
     // Merge task-specific and/or target-specific options with these defaults.
     var opts = this.options({
       header: '',
-      separator: '\n',
+      separator: '\n\n\n',
       footer: ''
     });
 
