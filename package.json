@@ -1,7 +1,7 @@
 {
   "name": "grunt-ivantage-trello-release-notes",
   "description": "Build release notes from user stories in Trello cards.",
-  "version": "0.5.2",
+  "version": "0.5.3",
   "homepage": "https://github.com/ivantage/grunt-ivantage-trello-release-notes",
   "author": {
     "name": "jtrussell",
