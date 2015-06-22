@@ -20,7 +20,8 @@ module.exports = function(grunt) {
     var opts = this.options({
       header: '',
       separator: '\n\n\n',
-      footer: ''
+      footer: '',
+      sortShardsFn: require('../lib/sort-md-files.js')
     });
 
     this.files.forEach(function(f) {
@@ -33,7 +34,11 @@ module.exports = function(grunt) {
         } else {
           return true;
         }
-      }).map(function(filepath) {
+      });
+
+      src.sort(opts.sortShardsFn);
+      
+      src = src.map(function(filepath) {
         // Read file source.
         return grunt.file.read(filepath);
       }).join(grunt.util.normalizelf(opts.separator));

@@ -119,6 +119,14 @@ Default Value: `''`
 
 Some HTML to include after the concatenated snippets.
 
+#### options.sortShardsFn
+Type: `Function`
+Default Value: `...`
+
+A function used to sort an array of markdown file paths before they are read in
+and concatenated into a single file. The default behavior is parse a semver
+version from the filename and sort files descending by that version number.
+
 
 ## The "ivantage_trello_release_boards" task
 
