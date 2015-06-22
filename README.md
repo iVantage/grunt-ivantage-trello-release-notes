@@ -312,6 +312,7 @@ guidelines](https://github.com/iVantage/Contribution-Guidelines).
 
 
 ## Release History
+- 2015-06-22 v0.6.0 Add option to sort markdown shards before concat
 - 2015-06-05 v0.5.1 Strip bracketted text from default li template
 - 2015-06-05 v0.5.0 Skip note creation if no boards provided (failed before)
 - 2015-06-05 v0.4.0 Add task (opt-in) to commit files to svn
