@@ -149,7 +149,11 @@ module.exports = function(grunt) {
         return tpl(c);
       });
 
-      grunt.file.write(opts.outfile, [opts.headerTpl, ''].concat(notes).join('\n'));
+      var shard = [opts.headerTpl, ''].concat(notes)
+                  .join('\n')
+                  .concat('\n'); // Signal that list is complete.
+
+      grunt.file.write(opts.outfile, shard);
       grunt.log.writeln('Notes written to "' + opts.outfile + '"');
       done();
     };

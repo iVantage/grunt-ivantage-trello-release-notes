@@ -37,7 +37,7 @@ module.exports = function(grunt) {
       });
 
       src.sort(opts.sortShardsFn);
-      
+
       src = src.map(function(filepath) {
         // Read file source.
         return grunt.file.read(filepath);
