@@ -49,7 +49,7 @@ module.exports = function(grunt) {
       grunt.log.writeln('Not running: "' + addCmd + '"');
     } else {
       var addCmdOut = sh.exec(addCmd, {silent: true});
-      if(0 !== addCmd.code) {
+      if(0 !== addCmdOut.code) {
         grunt.log.error('Failed to add release notes to version control.');
         return false;
       }
