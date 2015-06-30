@@ -123,7 +123,7 @@ module.exports = function(grunt) {
 
       // Get any embedded DoneDone links
       if(opts.doneDoneDomain) {
-        var pattern = new RegExp('https://' + opts.doneDoneDomain + '\.mydonedone\.com/issuetracker/projects/([0-9])*/issues/([0-9])*','ig');
+        var pattern = new RegExp('https://' + opts.doneDoneDomain + '\\.mydonedone\\.com/issuetracker/projects/([0-9])*/issues/([0-9])*', 'ig');
 
         cards.forEach(function(c) {
           var donedone = []
