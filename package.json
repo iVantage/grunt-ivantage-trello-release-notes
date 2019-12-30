@@ -28,12 +28,11 @@
     "test": "grunt test"
   },
   "devDependencies": {
-    "grunt-contrib-jshint": "^0.9.2",
-    "grunt-contrib-clean": "^0.5.0",
-    "grunt-contrib-nodeunit": "^0.3.3",
-    "grunt": "~0.4.2",
-    "cheerio": "^0.19.0",
-    "grunt-jscs": "^1.8.0"
+    "cheerio": "^1.0.0-rc.3",
+    "grunt": "~1.0.4",
+    "grunt-contrib-clean": "^2.0.0",
+    "grunt-contrib-jshint": "^2.1.0",
+    "grunt-contrib-nodeunit": "^2.0.0"
   },
   "peerDependencies": {
     "grunt": "~0.4.2"
@@ -42,13 +41,13 @@
     "gruntplugin"
   ],
   "dependencies": {
+    "async": "^3.1.0",
+    "handlebars": "^4.5.3",
+    "inquirer": "^7.0.1",
+    "kramed": "^0.5.0",
     "node-trello": "^1.1.2",
     "node-trello-utils": "git://github.com/ivantage/node-trello-utils",
-    "async": "^1.1.0",
-    "handlebars": "^3.0.3",
-    "kramed": "^0.5.0",
-    "inquirer": "^0.8.5",
-    "shelljs": "^0.5.1",
-    "semver": "^4.3.6"
+    "semver": "^7.1.1",
+    "shelljs": "^0.8.3"
   }
 }
